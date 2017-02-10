@@ -1,0 +1,20 @@
+{
+  "name": "smart-pension",
+  "version": "1.0.0",
+  "description": "Simple registration form",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "author": "Sam Rae",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^2.5.3",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-ng-html2js-preprocessor": "^1.0.0"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,28 @@
+{
+  "name": "smart-pension",
+  "authors": [
+    "Sam Rae <samuelrae@gmail.com>"
+  ],
+  "description": "",
+  "main": "app.js",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "angular-material": "^1.1.3",
+    "angular-animate": "^1.6.2",
+    "angular": "^1.6.2",
+    "angular-mocks": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "angular-material-icons": "^0.7.1"
+  }
+}

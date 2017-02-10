@@ -1,0 +1,215 @@
+<div
+  layout="row"
+  layout-align="center"
+>
+  <md-whiteframe
+    flex="100"
+    flex-gt-xs="60"
+    flex-gt-sm="40"
+    class="md-whiteframe-3dp"
+  >
+      <md-toolbar>
+
+        <div class="md-toolbar-tools">
+          <h2 md-truncate flex>Register for SmartPension</h2>
+        </div>
+
+      </md-toolbar>
+
+      <md-subheader ng-show="vm.stage===1" class="md-primary">Company details</md-subheader>
+      <md-subheader ng-show="vm.stage===2"  class="md-primary">Signatory details</md-subheader>
+      <md-subheader ng-show="vm.stage===3"  class="md-primary">Administrator details</md-subheader>
+
+      <md-content layout-margin>
+
+        <form
+          ng-switch="vm.stage"
+          name="register"
+          novalidate
+          ng-submit="vm.onSubmit(register)"
+        >
+          <ng-form
+              name="registerPart1"
+              novalidate
+              ng-switch-when="1"
+            >
+              <md-input-container class="md-block">
+                <label>Company name</label>
+                <input
+                  ng-model="vm.company.name"
+                  name="companyName"
+                  required
+                >
+                <div
+                  ng-messages="registerPart1.companyName.$error"
+                  ng-show="registerPart1.companyName.$touched || vm.clickedNext.registerPart1"
+                >
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+
+              <md-input-container class="md-block">
+                <label>Registration no.</label>
+                <input
+                  ng-model="vm.company.registrationNumber"
+                  name="registrationNumber"
+                  required
+                >
+                <div
+                  ng-messages="registerPart1.registrationNumber.$error"
+                  ng-show="registerPart1.registrationNumber.$touched || vm.clickedNext.registerPart1"
+                >
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+
+              <md-input-container class="md-block">
+                <label>Legal structure</label>
+                <md-select ng-model="vm.company.legalStructure" name="legalStructure" required>
+                  <md-option ng-repeat="structure in vm.legalStructures" value="{{structure}}">
+                    {{structure}}
+                  </md-option>
+                </md-select>
+                <div ng-messages="registerPart1.legalStructure.$error"
+                     ng-show="registerPart1.legalStructure.$touched || vm.clickedNext.registerPart1">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+
+              <div layout="row" layout-align="end">
+                <md-button
+                  ng-click="vm.onClickNext(registerPart1)"
+                  class="md-icon-button md-primary test-button"
+                  aria-label="Next"
+                >
+                  <ng-md-icon icon="chevron_right" size="40"></ng-md-icon>
+                </md-button>
+              </div>
+
+            </ng-form>
+
+          <ng-form
+              ng-switch-when="2"
+              name="registerPart2"
+              novalidate
+            >
+              <md-input-container class="md-block">
+                <label>Signatory forename</label>
+                <input ng-model="vm.company.signatory.forename" name="signatoryFirstName" required>
+                <div
+                  ng-messages="registerPart2.signatoryFirstName.$error"
+                  ng-show="registerPart2.signatoryFirstName.$touched || vm.clickedNext.registerPart2"
+                >
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+
+              <md-input-container class="md-block">
+                <label>Signatory surname</label>
+                <input ng-model="vm.company.signatory.surname" name="signatorySurname" required>
+                <div
+                  ng-messages="registerPart2.signatorySurname.$error"
+                  ng-show="registerPart2.signatorySurname.$touched || vm.clickedNext.registerPart2"
+                >
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+
+              <md-input-container class="md-block">
+                <label>Signatory email address</label>
+                <input ng-model="vm.company.signatory.email" type="email" name="signatoryEmail" required>
+                <div
+                  ng-messages="registerPart2.signatoryEmail.$error"
+                  ng-show="registerPart2.signatoryEmail.$touched || vm.clickedNext.registerPart2"
+                >
+                  <div ng-message="required">This is required.</div>
+                  <div ng-message="email">Please enter a valid email address.</div>
+                </div>
+              </md-input-container>
+
+
+              <div layout="row" layout-align="space-between">
+                <md-button
+                  class="md-icon-button md-primary"
+                  aria-label="Back"
+                  ng-click="vm.goBack()"
+                >
+                  <ng-md-icon icon="chevron_left" size="40"></ng-md-icon>
+                </md-button>
+
+                <md-button
+                  class="md-icon-button md-primary"
+                  aria-label="Back"
+                  ng-click="vm.onClickNext(registerPart2)"
+                >
+                  <ng-md-icon icon="chevron_right" size="40"></ng-md-icon>
+                </md-button>
+              </div>
+            </ng-form>
+
+          <ng-form ng-switch-when="3" name="registerPart3"  novalidate>
+
+            <md-input-container class="md-block">
+              <label>Administrator forename</label>
+              <input ng-model="vm.company.admin.forename" name="adminFirstName" required>
+              <div
+                ng-messages="registerPart3.adminFirstName.$error"
+                ng-show="registerPart3.adminFirstName.$touched || register.$submitted"
+              >
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>Signatory surname</label>
+              <input ng-model="vm.company.admin.surname" name="adminSurname" required>
+              <div
+                ng-messages="registerPart3.adminSurname.$error"
+                ng-show="registerPart3.signatorySurname.$touched || register.$submitted"
+              >
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>Administrator email address</label>
+              <input ng-model="vm.company.admin.email" type="email" name="adminEmail" required>
+              <div
+                ng-messages="registerPart3.adminEmail.$error"
+                ng-show="registerPart3.adminEmail.$touched || register.$submitted"
+              >
+                <div ng-message="required">This is required.</div>
+                <div ng-message="email">Please enter a valid email address.</div>
+              </div>
+            </md-input-container>
+
+
+            <div
+              layout="row"
+              layout-align="end"
+            >
+              <md-button
+                type="submit"
+                class="md-raised md-primary"
+              >Submit</md-button>
+            </div>
+          </ng-form>
+
+
+          <!--<input name="postalCode" ng-model="user.postalCode" placeholder="12345"-->
+          <!--required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">-->
+          <!--<div ng-messages="userForm.postalCode.$error" role="alert" multiple>-->
+          <!--<div ng-message="required" class="my-message">You must supply a postal code.</div>-->
+          <!--<div ng-message="pattern" class="my-message">That doesn't look like a valid postal-->
+          <!--code.-->
+          <!--</div>-->
+          <!--<div ng-message="md-maxlength" class="my-message">-->
+          <!--Don't use the long version silly...we don't need to be that specific...-->
+          <!--</div>-->
+          <!--</div>-->
+
+        </form>
+      </md-content>
+    </md-whiteframe>
+</div>
+
