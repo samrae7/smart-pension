@@ -43,7 +43,7 @@ function FormController(apiService) {
     vm.stage -= 1;
   };
 
-  vm.onSubmit = function(form) {
+  vm.onSubmit = function formControllerOnSubmit(form) {
     if (form.$valid) {
       apiService.postCompany(vm.company);
     }

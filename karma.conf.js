@@ -44,7 +44,7 @@ module.exports = function(config) {
       stripSuffix: '.html',
       // prepend this to the
       prependPrefix: '',
-      moduleName: 'foo'
+      moduleName: 'templates'
     },
 
     // test results reporter to use

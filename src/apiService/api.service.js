@@ -4,22 +4,22 @@ angular.module('smartPension')
     var service = {};
 
     service.postCompany = function apiServicePostCompany(companyData) {
-      var transformedCompanyData = transformCompanyData(companyData);
-
+      var transformedCompanyData = service.transformCompanyData(companyData);
       return $http.post(
-        'https://api.dev.autoenrolment.co.uk/companies',
+        'https://api.sandbox.autoenrolment.co.uk/companies',
         transformedCompanyData
       );
     //TODO - handle api response and show success or error
+    //TODO - put endpoint in app constant
     };
-
-    function transformCompanyData(companyData) {
+    //TODO - move transformer to its own service
+    service.transformCompanyData = function apiServiceTransformCompanyData(companyData) {
       return {
         name: companyData.name,
         registration_number: companyData.registrationNumber,
         legal_structure: companyData.legalStructure,
         signatories: [companyData.signatory],
-        admin: [companyData.admin]
+        admins: [companyData.admin]
       };
     }
 

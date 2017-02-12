@@ -1,70 +1,140 @@
 describe('form', function () {
 
   beforeEach(module('smartPension'));
-  beforeEach(module('foo'));
 
   var $controller,
-    $compile,
-    $templateCache,
-    $rootScope,
-    $scope;
+    $httpBackend,
+    apiService;
 
   beforeEach(inject(function(
-    $injector,
     _$controller_,
-    _$compile_,
-    _$templateRequest_,
-    _$templateCache_,
-    _$rootScope_
+    _$httpBackend_
   ){
     $controller = _$controller_;
-    $compile = _$compile_;
-    $templateCache = _$templateCache_;
-    $rootScope = _$rootScope_;
-    $scope = $rootScope.$new();
+    $httpBackend = _$httpBackend_;
+    apiService = {
+      postCompany: function() {}
+    };
   }));
 
-  describe('GIVEN the controller is instatiated', function () {
+  describe('GIVEN the controller is instantiated', function () {
     var vm;
 
     beforeEach(function() {
-      vm = $controller('FormController', {$scope: $scope});
+      vm = $controller('FormController', {});
     });
 
-    it('Should be defined', function () {
+    it('THEN it should be defined', function () {
       expect(vm).toBeDefined();
     });
   });
 
-  describe('GIVEN the form is compiled', function () {
+  describe('GIVEN The form is NOT valid' +
+    'WHEN onClickNext is called', function () {
     var vm,
       form,
-      spy,
-      $el;
+      mockFormName = 'fooForm',
+      startStage = 1;
 
     beforeEach(function() {
+      form = {
+        $valid: true,
+        $name: mockFormName
+      };
       vm = $controller('FormController');
-      vm.stage = 1;
-      spy = spyOn(vm, 'onClickNext');
-      var template = $templateCache.get('src/form/form');
-      console.log('t', template);
-      form = $compile(template)($scope);
-      $scope.$digest();
-      $el = angular.element(form);
-      console.log('e', $el);
-      var button = $el.find('.test-button');
-      console.log(button, 'b');
-      button.triggerHandler('click');
-      $scope.$digest();
+      vm.stage = startStage;
+      vm.onClickNext(form);
     });
 
-    // it('Should be defined', function () {
-    //   expect(form).toBeDefined();
-    // });
+    it('THEN clickedNext should be set to true', function () {
+      expect(vm.clickedNext[mockFormName]).toEqual(true);
+    });
 
-    it('Should call onClickNext', function () {
-      expect(spy).toHaveBeenCalled();
+    it('THEN vm.stage should increment by 1', function () {
+      expect(vm.stage).toEqual(startStage + 1);
     });
   });
 
+  describe('GIVEN the form is not valid' +
+    'WHEN onClickNext is called', function () {
+    var vm,
+      form,
+      mockFormName = 'fooForm',
+      startStage = 1;
+
+    beforeEach(function() {
+      form = {
+        $valid: false,
+        $name: mockFormName
+      };
+      vm = $controller('FormController');
+      vm.stage = startStage;
+      vm.onClickNext(form);
+    });
+
+    it('THEN clickedNext should be set to true', function () {
+      expect(vm.clickedNext[mockFormName]).toEqual(true);
+    });
+
+    it('THEN vm.stage should NOT increment by 1', function () {
+      expect(vm.stage).toEqual(startStage);
+    });
+  });
+
+  describe('WHEN goBack is called', function () {
+    var vm,
+      startStage = 2;
+
+    beforeEach(function() {
+      vm = $controller('FormController');
+      vm.stage = startStage;
+      vm.goBack();
+    });
+
+    it('THEN vm.stage should increment by 1', function () {
+      expect(vm.stage).toEqual(startStage - 1);
+    });
+  });
+
+  describe('GIVEN the form is valid, WHEN onSubmit is called', function () {
+    var vm,
+      form,
+      apiServicePostCompanySpy;
+
+    beforeEach(function() {
+      form = {
+        $valid: true
+      };
+      apiServicePostCompanySpy = spyOn(apiService, 'postCompany');
+      vm = $controller('FormController', {apiService: apiService});
+      vm.company = {};
+      $httpBackend.when('POST', 'https://api.dev.autoenrolment.co.uk/companies').respond({});
+      vm.onSubmit(form);
+    });
+
+    it('THEN apiService.postCompany should be called', function () {
+      expect(apiServicePostCompanySpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('GIVEN the form is valid, WHEN onSubmit is called', function () {
+    var vm,
+      form,
+      apiServicePostCompanySpy;
+
+    beforeEach(function() {
+      form = {
+        $valid: false
+      };
+      apiServicePostCompanySpy = spyOn(apiService, 'postCompany');
+      vm = $controller('FormController', {apiService: apiService});
+      vm.company = {};
+      $httpBackend.when('POST', 'https://api.dev.autoenrolment.co.uk/companies').respond({});
+      vm.onSubmit(form);
+    });
+
+    it('THEN apiService.postCompany should NOT be called', function () {
+      expect(apiServicePostCompanySpy).not.toHaveBeenCalled();
+    });
+  });
 });
