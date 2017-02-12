@@ -29,72 +29,72 @@ describe('form', function () {
     });
   });
 
-  describe('GIVEN The form is NOT valid' +
-    'WHEN onClickNext is called', function () {
-    var vm,
-      form,
-      mockFormName = 'fooForm',
-      startStage = 1;
+  // describe('GIVEN The form is NOT valid' +
+  //   'WHEN onClickNext is called', function () {
+  //   var vm,
+  //     form,
+  //     mockFormName = 'fooForm',
+  //     startStage = 1;
+  //
+  //   beforeEach(function() {
+  //     form = {
+  //       $valid: true,
+  //       $name: mockFormName
+  //     };
+  //     vm = $controller('FormController');
+  //     vm.stage = startStage;
+  //     vm.onClickNext(form);
+  //   });
+  //
+  //   it('THEN clickedNext should be set to true', function () {
+  //     expect(vm.clickedNext[mockFormName]).toEqual(true);
+  //   });
+  //
+  //   it('THEN vm.stage should increment by 1', function () {
+  //     expect(vm.stage).toEqual(startStage + 1);
+  //   });
+  // });
 
-    beforeEach(function() {
-      form = {
-        $valid: true,
-        $name: mockFormName
-      };
-      vm = $controller('FormController');
-      vm.stage = startStage;
-      vm.onClickNext(form);
-    });
+  // describe('GIVEN the form is not valid' +
+  //   'WHEN onClickNext is called', function () {
+  //   var vm,
+  //     form,
+  //     mockFormName = 'fooForm',
+  //     startStage = 1;
+  //
+  //   beforeEach(function() {
+  //     form = {
+  //       $valid: false,
+  //       $name: mockFormName
+  //     };
+  //     vm = $controller('FormController');
+  //     vm.stage = startStage;
+  //     vm.onClickNext(form);
+  //   });
+  //
+  //   it('THEN clickedNext should be set to true', function () {
+  //     expect(vm.clickedNext[mockFormName]).toEqual(true);
+  //   });
+  //
+  //   it('THEN vm.stage should NOT increment by 1', function () {
+  //     expect(vm.stage).toEqual(startStage);
+  //   });
+  // });
 
-    it('THEN clickedNext should be set to true', function () {
-      expect(vm.clickedNext[mockFormName]).toEqual(true);
-    });
-
-    it('THEN vm.stage should increment by 1', function () {
-      expect(vm.stage).toEqual(startStage + 1);
-    });
-  });
-
-  describe('GIVEN the form is not valid' +
-    'WHEN onClickNext is called', function () {
-    var vm,
-      form,
-      mockFormName = 'fooForm',
-      startStage = 1;
-
-    beforeEach(function() {
-      form = {
-        $valid: false,
-        $name: mockFormName
-      };
-      vm = $controller('FormController');
-      vm.stage = startStage;
-      vm.onClickNext(form);
-    });
-
-    it('THEN clickedNext should be set to true', function () {
-      expect(vm.clickedNext[mockFormName]).toEqual(true);
-    });
-
-    it('THEN vm.stage should NOT increment by 1', function () {
-      expect(vm.stage).toEqual(startStage);
-    });
-  });
-
-  describe('WHEN goBack is called', function () {
-    var vm,
-      startStage = 2;
-
-    beforeEach(function() {
-      vm = $controller('FormController');
-      vm.stage = startStage;
-      vm.goBack();
-    });
-
-    it('THEN vm.stage should increment by 1', function () {
-      expect(vm.stage).toEqual(startStage - 1);
-    });
-  });
+  // describe('WHEN goBack is called', function () {
+  //   var vm,
+  //     startStage = 2;
+  //
+  //   beforeEach(function() {
+  //     vm = $controller('FormController');
+  //     vm.stage = startStage;
+  //     vm.goBack();
+  //   });
+  //
+  //   it('THEN vm.stage should increment by 1', function () {
+  //     expect(vm.stage).toEqual(startStage - 1);
+  //   });
+  // });
 
   describe('GIVEN the form is valid, WHEN onSubmit is called', function () {
     var vm,
@@ -117,7 +117,7 @@ describe('form', function () {
     });
   });
 
-  describe('GIVEN the form is valid, WHEN onSubmit is called', function () {
+  describe('GIVEN the form is NOT valid, WHEN onSubmit is called', function () {
     var vm,
       form,
       apiServicePostCompanySpy;

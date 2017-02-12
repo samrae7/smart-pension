@@ -19,8 +19,8 @@ function FormController(apiService) {
     admin: {}
   };
 
-  vm.stage = 1;
-  vm.clickedNext = {};
+  // vm.stage = 1;
+  // vm.clickedNext = {};
   vm.legalStructures = [
     'Limited Company',
     'Limited Partnership',
@@ -32,16 +32,16 @@ function FormController(apiService) {
     'Other'
   ];
 
-  vm.onClickNext = function formControllerOnClickNext(form) {
-    vm.clickedNext[form.$name] = true;
-    if(form.$valid) {
-      vm.stage += 1;
-    }
-  };
+  // vm.onClickNext = function formControllerOnClickNext(form) {
+  //   vm.clickedNext[form.$name] = true;
+  //   if(form.$valid) {
+  //     vm.stage += 1;
+  //   }
+  // };
 
-  vm.goBack = function formControllerGoBack() {
-    vm.stage -= 1;
-  };
+  // vm.goBack = function formControllerGoBack() {
+  //   vm.stage -= 1;
+  // };
 
   vm.onSubmit = function formControllerOnSubmit(form) {
     if (form.$valid) {
