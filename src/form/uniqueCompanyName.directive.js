@@ -2,7 +2,7 @@ angular.module('smartPension')
   .directive('uniqueCompanyName', ['apiService', '$q', function(apiService, $q) {
     return {
       require: 'ngModel',
-      link: function(formScope, elm, attrs, ngModelCtrl) {
+      link: function(formScope, element, attrs, ngModelCtrl) {
         ngModelCtrl.$asyncValidators.uniqueCompanyName = function(modelValue, viewValue) {
           var deferred = $q.defer();
           apiService.getCompanyByName(viewValue)
