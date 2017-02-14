@@ -4,8 +4,7 @@ angular.module('smartPension', [
   'ngRoute',
   'ngMaterial',
   'ngMessages',
-  'ngMdIcons',
-  'material.svgAssetsCache'
+  'ngMdIcons'
 ])
   .constant('apiEndpoints', {
     base: 'https://api.sandbox.autoenrolment.co.uk',

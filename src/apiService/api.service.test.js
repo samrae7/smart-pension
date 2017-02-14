@@ -6,19 +6,22 @@ describe('apiService', function () {
     $httpBackend,
     $rootScope,
     $scope,
-    $q;
+    $q,
+    apiEndpoints;
 
   beforeEach(inject(function(
     _apiService_,
     _$httpBackend_,
     _$rootScope_,
-    _$q_
+    _$q_,
+    _apiEndpoints_
   ){
     apiService = _apiService_;
     $httpBackend = _$httpBackend_;
     $rootScope = _$rootScope_;
     $scope = $rootScope.$new();
     $q = _$q_;
+    apiEndpoints = _apiEndpoints_;
   }));
 
   describe('WHEN postCompany is called', function () {
@@ -43,6 +46,32 @@ describe('apiService', function () {
           result = response.data;
         });
     });
+    beforeEach(function() {
+      $httpBackend.flush();
+    });
+
+    it('THEN it should return the response from the server', function () {
+      expect(result).toEqual(mockResponse);
+    });
+  });
+
+  describe('WHEN getCompany by name is called', function () {
+    var result,
+      mockResponse;
+
+    beforeEach(function() {
+      mockResponse = {baz: 'chaz'};
+
+      var mockCompanyName = 'myFabulousCompany';
+
+      $httpBackend.whenGET('https://api.sandbox.autoenrolment.co.uk/companies/by_name?name=' + mockCompanyName).respond(mockResponse);
+
+      apiService.getCompanyByName(mockCompanyName)
+        .then(function(response) {
+          result = response.data;
+        });
+    });
+
     beforeEach(function() {
       $httpBackend.flush();
     });

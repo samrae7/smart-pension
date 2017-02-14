@@ -1,5 +1,5 @@
 angular.module('smartPension')
-  .factory('apiService', ['$http', function($http) {
+  .factory('apiService', ['$http', 'apiEndpoints', function($http, apiEndpoints) {
 
     var service = {};
 

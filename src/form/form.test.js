@@ -4,17 +4,20 @@ describe('form', function () {
 
   var $controller,
     $httpBackend,
-    apiService;
+    apiService,
+    $q;
 
   beforeEach(inject(function(
     _$controller_,
-    _$httpBackend_
+    _$httpBackend_,
+    _$q_
   ){
     $controller = _$controller_;
     $httpBackend = _$httpBackend_;
     apiService = {
       postCompany: function() {}
     };
+    $q = _$q_;
   }));
 
   describe('GIVEN the controller is instantiated', function () {
@@ -38,7 +41,7 @@ describe('form', function () {
       form = {
         $valid: true
       };
-      apiServicePostCompanySpy = spyOn(apiService, 'postCompany');
+      apiServicePostCompanySpy = spyOn(apiService, 'postCompany').and.returnValue($q.resolve());
       vm = $controller('FormController', {apiService: apiService});
       vm.company = {};
       $httpBackend.when('POST', 'https://api.dev.autoenrolment.co.uk/companies').respond({});
