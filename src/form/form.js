@@ -6,9 +6,9 @@ angular.module('smartPension')
       controllerAs: 'vm'
     });
   }])
-  .controller('FormController', ['apiService', FormController]);
+  .controller('FormController', ['apiService', '$location', FormController]);
 
-function FormController(apiService) {
+function FormController(apiService, $location) {
   vm = this;
 
   vm.company = {
@@ -19,8 +19,6 @@ function FormController(apiService) {
     admin: {}
   };
 
-  // vm.stage = 1;
-  // vm.clickedNext = {};
   vm.legalStructures = [
     'Limited Company',
     'Limited Partnership',
@@ -32,20 +30,31 @@ function FormController(apiService) {
     'Other'
   ];
 
-  // vm.onClickNext = function formControllerOnClickNext(form) {
-  //   vm.clickedNext[form.$name] = true;
-  //   if(form.$valid) {
-  //     vm.stage += 1;
-  //   }
-  // };
+  vm.serverErrors = [];
 
-  // vm.goBack = function formControllerGoBack() {
-  //   vm.stage -= 1;
-  // };
+  var serverErrorMessages = {
+    707: 'This company name is already in use',
+    1607: 'The signatory email address is not a real email address.',
+    2007: 'The admin email address is not a real email address.',
+    2009: 'The administrator and signatory cannot have the same email address',
+    1609: 'The administrator and signatory cannot have the same email address'
+  };
 
   vm.onSubmit = function formControllerOnSubmit(form) {
     if (form.$valid) {
-      apiService.postCompany(vm.company);
+      apiService.postCompany(vm.company)
+        .then(function (response) {
+          $location.path('/success');
+        })
+        .catch(function(response) {
+          var errorsArray = response.data.errors;
+          vm.serverErrors = errorsArray.map(function(error, index, array){
+            return{
+              code: error.code.toString(),
+              message: serverErrorMessages[error.code]
+            }
+          });
+        });
     }
   };
 }

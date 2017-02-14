@@ -22,7 +22,6 @@ describe('apiService', function () {
   }));
 
   describe('WHEN postCompany is called', function () {
-
     var result,
       mockResponse;
 
