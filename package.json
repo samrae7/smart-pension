@@ -4,11 +4,13 @@
   "description": "Simple registration form",
   "main": "src/app.js",
   "scripts": {
+    "start": "http-server -a localhost -p 8000 -c-1 ./src",
     "test": "karma start karma.conf.js"
   },
   "author": "Sam Rae",
   "license": "ISC",
   "devDependencies": {
+    "http-server": "^0.9.0",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.1",
