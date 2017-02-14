@@ -4,7 +4,9 @@
   "description": "Simple registration form",
   "main": "src/app.js",
   "scripts": {
-    "start": "http-server -a localhost -p 8000 -c-1 ./src",
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "./node_modules/.bin/http-server -a localhost -p 8000 -c-1 ./src",
     "test": "karma start karma.conf.js"
   },
   "author": "Sam Rae",
