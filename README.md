@@ -17,7 +17,6 @@ This should install npm and bower dependencies and serve the site locally
 Browse to http://localhost:8000/
 
 ##Tests
-Tests are written are run with karma and written .
 
 Run:
 
